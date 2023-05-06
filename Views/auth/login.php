@@ -7,65 +7,31 @@
 
 
 <?php
-/*
+require_once '../../Models/user.php';
 if (isset($_POST['submit'])) {
-  if (!empty($_POST['email']) && !empty($_POST['password'])) {
-   if ($_POST['email']=='admin' && $_POST['password']=='123'){
-     $_SESSION["email"] = $email;
-     header("Location: ../../../Views/admin/index.php");
-     exit();
-   }
-   $usrAcc = new user();
-   $auth = new AuthController();
-   $auth->login($usrAcc);
-   $result = $usrAcc->login($_POST['email'], $_POST['password']);
-      if ($result == 'Wrong password. Please try again. Redirecting...') {
-          echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
-          echo "<script>setTimeout(\"location.href = 'login.php';\",2000);</script>";
-      }elseif($result == 'User not found. Try to register first. Redirecting...'){
-          echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
-          echo "<script>setTimeout(\"location.href = 'login.php';\",2000);</script>";
-      } elseif($result == 'Logged in successfully. Redirecting...') {*/
-       /*
-          echo "<div class='alermnt alert-success text-center' role='alert'>$result</div>";
-          echo "<script>setTimeout(\"location.href = '../index.php';\",2000);</script>";
-          *//*
-         if($usrAcc->email == 'admin' && $usrAcc->password == '123' ){
-           echo "<div class='alermnt alert-success text-center' role='alert'>$result</div>";
-           echo "<script>setTimeout(\"location.href = '../index.php';\",2000);</script>";
-         }
-      }
-      die;
-      
-  }
-}*/
+    if (!empty($_POST['email']) && !empty($_POST['password'])) {
+        if($_POST['email']=='admin' && $_POST['password']=='123'){
+          echo "<script>setTimeout(\"location.href = '../../dash.php';\",2000);</script>";
+          exit();
+        }
+        $usrAcc = new user();
 
- 
-
-   require_once '../../Models/user.php';
-   require_once '../../Controllers/AuthController.php';
-
-   session_start();
-
-   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["email"];
-    $password = $_POST["password"];
-  
-    // Check if the username and password are correct
-    if ($username == "admin" && $password == "123") {
-      // Store the username in a session variable
-      $_SESSION["username"] = $username;
-  
-      // Redirect the user to the dashboard page
-      header("Location: ../../../Views/admin/index.php");
-      exit();
-    } else {
-      $error = "Invalid username or password";
+        $result = $usrAcc->login($_POST['email'], $_POST['password']);
+        if ($result == 'Wrong password. Please try again. Redirecting...') {
+            echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
+            echo "<script>setTimeout(\"location.href = 'login.php';\",2000);</script>";
+        }elseif($result == 'User not found. Try to register first. Redirecting...'){
+            echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
+            echo "<script>setTimeout(\"location.href = 'login.php';\",2000);</script>";
+        } elseif($result == 'Logged in successfully. Redirecting...') {
+            echo "<div class='alermnt alert-success text-center' role='alert'>$result</div>";
+            echo "<script>setTimeout(\"location.href = '../user_index.php';\",2000);</script>";
+             
+        }
+        die;
     }
-  }
-   
-   
-?>                           
+}
+?> 
 
 
 
@@ -83,24 +49,29 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
+    <!-- End plugin css for this page   <div class=" center"><img src="../../assets/images/A.png" alt=""></div> -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="shortcut icon" href="../../assets/images/A.png" />
     
   </head>
   <body>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
+        
         <div class="row w-100 m-0">
+        
           <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            
+            <div class=" col-12">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">  <div class=" center"><img src="../../assets/images/A.png" alt=""></div> </div>
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>
-                <form method="submit">
+                <form method="POST">
                   <div class="form-group">
                     <label>Username or email *</label>
                     <?php
@@ -114,15 +85,9 @@ if (isset($_POST['submit'])) {
                     <label>Password *</label>
                     <input type="text" class="form-control p_input" id = "password" name = "password">
                   </div>
-                  <div class="form-group d-flex align-items-center justify-content-between">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"> Remember me </label>
-                    </div>
-                    <a href="#" class="forgot-pass">Forgot password</a>
-                  </div>
+
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                    <button type="submit" class="btn btn-primary btn-block enter-btn" name = "submit" >Login</button>
                   </div>
                   
                  
@@ -130,6 +95,11 @@ if (isset($_POST['submit'])) {
                 </form>
               </div>
             </div>
+          
+
+            </div>
+          
+            
           </div>
           <!-- content-wrapper ends -->
         </div>

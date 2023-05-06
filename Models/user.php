@@ -1,7 +1,7 @@
 
 
 <?php
-
+require_once './Controllers/DBController.php';
 
 class user{
     private $db;
@@ -23,12 +23,12 @@ class user{
         $this->password = $pw;
         $this->db->startConnection();
         if ($this->userExists()) {
-            $qry = "SELECT * FROM users WHERE email='$this->email'";
+            $qry = "SELECT * FROM user WHERE email='$this->email'";
             $result = $this->db->select($qry);
             if ($result[0]['password'] == $this->password) {
-                $this->user_id = $result[0]['user_ID'];
+                $this->user_id = $result[0]['user_id'];
                 session_start();
-                $_SESSION['UserId'] = $this->user_id;
+                $_SESSION['user_id'] = $this->user_id;
                 $this->user_name = $result[0]['user_name'];
                 
                 $this->db->closeConnection();
@@ -45,7 +45,7 @@ class user{
 	private function userExists()
     {
         $this->db->startConnection();
-        $qry = "SELECT * FROM users WHERE email='$this->email'";
+        $qry = "SELECT * FROM user WHERE email='$this->email'";
         $result = $this->db->select($qry);
         if (count($result) > 0) {
             return true;
@@ -53,6 +53,7 @@ class user{
             return false;
         }
     }
+    
 	public function register($un, $ci, $em, $pw, $ri){
         $this->user_name = $un;
         $this->college_id = $ci;
@@ -63,7 +64,7 @@ class user{
             if ($this->userExists()) {
                 return "User already exists. Try again";
             } else {
-                $qry = "INSERT INTO users (firstName,lastName,email,password,numOfChannels,profilePic) VALUES ('$this->user_name','$this->email','$this->password)";
+                $qry = "INSERT INTO user (user_name,email,password,role_id,college_id) VALUES ('$this->user_name','$this->email','$this->password','$this->role_id','$this->college_id')";
                 if ($this->db->insert($qry)) {
                     $this->db->closeConnection();
                     return "Registration successful. Redirecting to login";
@@ -73,6 +74,33 @@ class user{
                 }
             }
         }
+    }
+
+    public function GetAccounts()
+    {
+        $this->db->startConnection();
+        $qry = "SELECT * FROM user WHERE user_id='$this->user_id'";
+        $result = $this->db->select($qry);
+        if (count($result) > 0) {
+            $this->user_name = $result[0]['user_name'];
+            $this->email = $result[0]['email'];
+            $this->password = $result[0]['password'];
+            $this->college_id = $result[0]['college_id'];
+            $this->role_id = $result[0]['role_id'];
+            $this->db->closeConnection();
+        } else {
+            $this->db->closeConnection();
+        }
+    }
+    
+    public function GetAccNum()
+    {
+        $this->db->startConnection();
+        $qry = "SELECT `user`.`user_id` FROM `user` WHERE 1;";
+        $result = $this->db->select($qry);
+        
+        $this->db->closeConnection();
+        return count($result);        
     }
 
 

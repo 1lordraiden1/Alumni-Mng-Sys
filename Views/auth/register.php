@@ -60,13 +60,15 @@ if (isset($_POST['submit'])) {
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="shortcut icon" href="../../assets/images/A.png" />
   </head>
   <body>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="row w-100 m-0">
           <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+          <div class=" col-12">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">  <div class=" center"><img src="../../assets/images/A.png" alt=""></div> </div>
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Register</h3>
@@ -77,30 +79,22 @@ if (isset($_POST['submit'])) {
                   </div>
                   <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control p_input">
+                    <input type="email" name ="email" class="form-control p_input">
                   </div>
                   <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control p_input">
+                    <input type="password" name ="password" class="form-control p_input">
                   </div>
-                  <div class="form-group d-flex align-items-center justify-content-between">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"> Remember me </label>
-                    </div>
-                    <a href="#" class="forgot-pass">Forgot password</a>
-                  </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
-                  </div>
+
+                  
                   <div class = "row">
                   <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" name ="dropdown" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                           
                           <!--<a class="dropdown-item" href="#">Action</a>-->
                           <?php 
-                        /*
+                        
                         foreach($events as $event){
 
                           ?>
@@ -111,7 +105,7 @@ if (isset($_POST['submit'])) {
                           </div>
                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div class="me-2">
-                              <small class="text-muted d-block mb-1"><?php echo $event["Subject"] ?></small>
+                              <small class="text-muted d-block mb-1">x<?php echo $event["Subject"] ?></small>
                               <h6 class="mb-0"><?php echo $event["Day"] ?></h6>
                             </div>
                             <div class="user-progress d-flex align-items-center gap-1">
@@ -124,7 +118,7 @@ if (isset($_POST['submit'])) {
                           <?php
 
                         }
-                        */
+                        
                         ?>
 
                          
@@ -146,13 +140,18 @@ if (isset($_POST['submit'])) {
                         </div>
                       </div>
                   </div>
+                  <br>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block enter-btn" name ="submit" >Login</button>
+                  </div>
                 
                   
                   <p class="sign-up text-center">Already have an Account?<a href="login.php"> Sign In</a></p>
-                  <p class="terms">By creating an account you are accepting our<a href="#"> Terms & Conditions</a></p>
                 </form>
               </div>
             </div>
+          
+          </div>
           </div>
           <!-- content-wrapper ends -->
         </div>
@@ -175,3 +174,5 @@ if (isset($_POST['submit'])) {
     <!-- endinject -->
   </body>
 </html>
+
+
