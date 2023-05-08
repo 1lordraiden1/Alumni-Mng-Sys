@@ -11,7 +11,7 @@ require_once '../../Models/user.php';
 if (isset($_POST['submit'])) {
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
         if($_POST['email']=='admin' && $_POST['password']=='123'){
-          echo "<script>setTimeout(\"location.href = '../../dash.php';\",2000);</script>";
+          echo "<script>setTimeout(\"location.href = '../../Pages/dash.php';\",2000);</script>";
           exit();
         }
         $usrAcc = new user();
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
             echo "<script>setTimeout(\"location.href = 'login.php';\",2000);</script>";
         } elseif($result == 'Logged in successfully. Redirecting...') {
             echo "<div class='alermnt alert-success text-center' role='alert'>$result</div>";
-            echo "<script>setTimeout(\"location.href = '../user_index.php';\",2000);</script>";
+            echo "<script>setTimeout(\"location.href = '../student/user_index.php';\",2000);</script>";
              
         }
         die;

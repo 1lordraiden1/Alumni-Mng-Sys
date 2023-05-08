@@ -1,6 +1,7 @@
 
 <?php
 require_once '../../Models/user.php';
+require_once '../../Models/role.php';
 session_start();
 if (isset($_POST['submit'])) {
     if (!empty($_POST['user_name']) && !empty($_POST['college_id']) && !empty($_POST['email']) && !empty($_POST['password']) && isset($_FILES['role_id'])) {
@@ -21,10 +22,12 @@ if (isset($_POST['submit'])) {
             move_uploaded_file($Tmp_ppName, $pp_upload_path);
         }
         */
-        $usr = new User();
+        $usr = new user();
+        $rol = new role;
+       
 
         
-        $result = $usr->register($_POST['user_name'],$_POST['college_id'],$_POST['email'], $_POST['password'],$_POST['role_id'],);
+        $result = $usr->register($_POST['user_name'],$_POST['email'], $_POST['password'],$_POST['role_id'],$_POST['college_id']);
         if ($result == 'User already exists. Try again') {
             echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
             echo "<script>setTimeout(\"location.href = 'signup.php';\",2000);</script>";
@@ -86,60 +89,51 @@ if (isset($_POST['submit'])) {
                     <input type="password" name ="password" class="form-control p_input">
                   </div>
 
-                  
-                  <div class = "row">
+                  <div class="d-flex">
+                    <div class="row">
+                    <div class="dropdown">
+                  <button class="btn btn-facebook mr-2 col" type="button" name = "role_id" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select Role  </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <?php foreach($colleges as $clo){ ?>                      
+                      <a class="dropdown-item" href="#"><?php echo $clo[0]['college_name'] ; ?></a> <?php 
+                      }
+                        ?>
+                                                   
+                    </div>                              
+                  </div>
                   <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" name ="dropdown" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </button>
+                  <button class="btn btn-google col" type="button" name = "college_id" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Select College </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          
-                          <!--<a class="dropdown-item" href="#">Action</a>-->
+
+                          <a class="dropdown-item" href="#">Action</a>
+                         
+                        </div>
+                  </div>
+           
+                    </div>
+                    
+                  
+                  
+                  </div>
+                  
+                 
+                          <!--<a class="dropdown-item" href="#">Action</a>   -->
                           <?php 
+                                                  
                         
-                        foreach($events as $event){
 
                           ?>
 
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">x<?php echo $event["Subject"] ?></small>
-                              <h6 class="mb-0"><?php echo $event["Day"] ?></h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0"><?php echo $event["Date"] ?></h6>
-                              <span class="text-muted">AM</span>
-                            </div>
-                          </div>
-                        </li>
-                          
-                          <?php
-
-                        }
-                        
-                        ?>
+                       
 
                          
-                        </div>
-                      </div>
+                        
                       
-                      <div class =" size">
+                     
                                                               
-                      </div>
-                      <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <h6 class="dropdown-header">Settings</h6>
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                      </div>
-                  </div>
+                     
+                      
+                  
                   <br>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-block enter-btn" name ="submit" >Login</button>

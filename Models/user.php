@@ -1,7 +1,7 @@
 
 
 <?php
-require_once './Controllers/DBController.php';
+require_once '../Controllers/DBController.php';
 
 class user{
     private $db;
@@ -79,18 +79,12 @@ class user{
     public function GetAccounts()
     {
         $this->db->startConnection();
-        $qry = "SELECT * FROM user WHERE user_id='$this->user_id'";
+        $qry = "SELECT * FROM `user`";
         $result = $this->db->select($qry);
-        if (count($result) > 0) {
-            $this->user_name = $result[0]['user_name'];
-            $this->email = $result[0]['email'];
-            $this->password = $result[0]['password'];
-            $this->college_id = $result[0]['college_id'];
-            $this->role_id = $result[0]['role_id'];
-            $this->db->closeConnection();
-        } else {
-            $this->db->closeConnection();
-        }
+        
+        $this->db->closeConnection();
+        return ($result);
+    
     }
     
     public function GetAccNum()

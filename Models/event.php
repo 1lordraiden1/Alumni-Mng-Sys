@@ -1,5 +1,7 @@
 <?php 
-require_once './Controllers/DBController.php';
+
+require_once '../Controllers/DBController.php';
+
 class event{
     protected $db;
     private $eventID;

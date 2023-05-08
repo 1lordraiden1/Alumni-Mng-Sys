@@ -1,6 +1,8 @@
 
 <?php 
+require_once '../Models/user.php';
 
+$u = new user;
 ?>
 
 <!DOCTYPE html>

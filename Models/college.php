@@ -1,36 +1,37 @@
 <?php 
 require_once '../Controllers/DBController.php';
-
-
-class role{
-
+class college{
     protected $db;
-    private $role_id;
-    private $role_name;
+    private $college_id;
+    private $college_name;
+    private $college_location;
+
 
     public function __construct()
     {
         $this->db = new DBController();
     }
-    public function GetRoles()
+
+    public function GetColleges()
     {
         $this->db->startConnection();
-        $qry = "SELECT `college`.`college_id` FROM `college` WHERE 1;";
-        $result = $this->db->select($qry);
-        
-        $this->db->closeConnection();
-        return ($result);        
-    }
-    public function GetRoleInfo($id)
-    {
-        $this->db->startConnection();
-        $qry = "SELECT * FROM `role` WHERE `role_id` = $id";
+        $qry = "SELECT * FROM `college`";
         $result = $this->db->select($qry);
         
         $this->db->closeConnection();
         return $result;        
     }
-
-
+    public function GetCollegeInfo($id)
+    {
+        $this->db->startConnection();
+        $qry = "SELECT * FROM `college` WHERE `college_id` = $id";
+        $result = $this->db->select($qry);
+        
+        $this->db->closeConnection();
+        return $result;        
+    }
+    
 }
+
+
 ?>
