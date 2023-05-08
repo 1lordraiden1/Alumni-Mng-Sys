@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
             echo "<script>setTimeout(\"location.href = 'login.php';\",2000);</script>";
         } elseif($result == 'Logged in successfully. Redirecting...') {
             echo "<div class='alermnt alert-success text-center' role='alert'>$result</div>";
-            echo "<script>setTimeout(\"location.href = '../student/user_index.php';\",2000);</script>";
+            echo "<script>setTimeout(\"location.href = '../student/index.php';\",2000);</script>";
              
         }
         die;
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/A.png" />
+    <link rel="shortcut icon" href="../assets/images/A.png" />
     
   </head>
   <body>
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
           <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
             
             <div class=" col-12">
-            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">  <div class=" center"><img src="../../assets/images/A.png" alt=""></div> </div>
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">  <div class = "center"><img src="../assets/images/A.png" alt=""></div> </div>
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>

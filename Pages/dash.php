@@ -1,9 +1,8 @@
 <?php
 require_once '../Models/user.php';
-require_once '../Models/event.php';
 require_once '../Models/college.php';
 require_once '../Models/role.php';
-
+require_once '../Models/event.php';
 $usr = new user;
 $eve= new event;
 $col = new college;
@@ -90,7 +89,7 @@ $users = $usr->GetAccounts();
           </li>
           <!--Our Doc-->
           <li class="nav-item menu-items">
-            <a class="nav-link" href="Task-Documentation.pdf">
+            <a class="nav-link" href="../Task-Documentation.pdf">
               <span class="menu-icon">
                 <i class="mdi mdi-file-document-box"></i>
               </span>

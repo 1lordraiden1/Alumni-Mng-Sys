@@ -1,8 +1,13 @@
 
 <?php 
 require_once '../Models/user.php';
+require_once '../Models/college.php';
+require_once '../Models/role.php';
 
-$u = new user;
+$usr = new user;
+$col = new college;
+$rol = new role;
+$users = $usr->GetAccounts();
 ?>
 
 <!DOCTYPE html>
@@ -156,25 +161,41 @@ $u = new user;
                             <th> Project </th>
                             <th> Payment Mode </th>
                             <th> Start Date </th>
-                            <th> Payment Status </th>
+                            
                           </tr>
                         </thead>
                         <tbody>
+                        <?php 
+                        foreach($users as $user){
+                          $col_id=$col->GetCollegeInfo($user['college_id']);
+                          $rol_id=$rol->GetRoleInfo($user['role_id']);
+                        ?>
                         <tr>
                             <td>
-                              <img src="assets/images/faces/face1.jpg" alt="image" />
-                              <span class="pl-2">Henry Klein</span>
+                              <span class="pl-2"><?php echo $user ['user_name'] ?></span>
                             </td>
-                            <td> 02312 </td>
-                            <td> $14,500 </td>
-                            <td> Dashboard </td>
-                            <td> Credit card </td>
-                            <td> 04 Dec 2019 </td>
+                            <td> <?php echo $user['email'] ?> </td>
+                            <td>  <?php echo $user['password'] ?> </td>
+                            <td> <?php  echo $col_id[0]['college_name'] ?> </td>
                             <td>
-                              <div class="badge badge-outline-success">Alumni</div>
+                              <div class="badge badge-outline-success"><?php echo  $rol_id[0]['role_name']  ?></div>
+                            </td>
+                            <td>
+                            <div class="dropdown">
+                            <button type="button" class="btn btn-outline-info dropdown-toggle" id="dropdownMenuIconButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="mdi mdi-clock"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3">
+                              <h6 class="dropdown-header">Settings</h6>
+                              <a class="dropdown-item" href="#">Edit</a>
+                              <a class="dropdown-item" href="#">Delete</a>
+
+                            </div>
                             </td>
                           </tr>
-                          <tr>
+                        <?php 
+                        }
+                        ?>
                         </tbody>
                       </table>
                     </div>
