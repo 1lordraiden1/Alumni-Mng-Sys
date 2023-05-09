@@ -15,11 +15,11 @@ class role{
     public function GetRoles()
     {
         $this->db->startConnection();
-        $qry = "SELECT `college`.`college_id` FROM `college` WHERE 1;";
+        $qry = "SELECT * FROM `role`";
         $result = $this->db->select($qry);
         
         $this->db->closeConnection();
-        return ($result);        
+        return $result;        
     }
     public function GetRoleInfo($id)
     {

@@ -186,9 +186,9 @@ $users = $usr->GetAccounts();
                               <i class="mdi mdi-clock"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3">
-                              <h6 class="dropdown-header">Settings</h6>
-                              <a class="dropdown-item" href="#">Edit</a>
-                              <a class="dropdown-item" href="#">Delete</a>
+                          
+                              <a class="dropdown-item" href="add_acc.php">Edit</a>
+                              <a class="dropdown-item" href="#" >Delete</a>
 
                             </div>
                             </td>

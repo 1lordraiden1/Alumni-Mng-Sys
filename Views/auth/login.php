@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    <!-- Required meta tags ../student/index.php -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Corona Admin</title>
@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
                   </div>
                   
                  
-                  <p class="sign-up">Don't have an Account?<a href="register.php"> Sign Up</a></p>
+                  <p class="sign-up">Don't have an Account?<a href="../student/register.php"> Sign Up</a></p>
                 </form>
               </div>
             </div>

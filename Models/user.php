@@ -97,6 +97,26 @@ class user{
         return count($result);        
     }
 
+    public function GetUserInfo($id)
+    {
+        $this->db->startConnection();
+        $qry = "SELECT * FROM `user` WHERE `user_id` = $id";
+        $result = $this->db->select($qry);
+        
+        $this->db->closeConnection();
+        return $result;        
+    }
+
+    public function GetUserName($id)
+    {
+        $this->db->startConnection();
+        $qry = "SELECT`user_name` FROM `user` WHERE `user_id`=$id";
+        $result = $this->db->select($qry);
+        
+        $this->db->closeConnection();
+        return $result;        
+    }
+
 
 
 }
