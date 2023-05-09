@@ -148,6 +148,10 @@ $links = array("FCAIHelwan.docx","FECairo.docx");
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Colleges</h4>
+                    <table class="table">
+                      <button type="button" class="btn btn-primary btn-fw">
+                            <a class="dropdown-item" href="add_college.php">ADD</a>
+                    </button>
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
@@ -156,14 +160,20 @@ $links = array("FCAIHelwan.docx","FECairo.docx");
                             <th> ID </th>
                             <th> College </th>
                             <th> Place </th>
-                            <th>Options</th>
+                            <th>Description</th>
+                            <th>Delete</th>
                             
                           </tr>
                         </thead>
                         <tbody>
                         <?php 
                         foreach($cols as $c){
+                          $c_id = $c['college_id'];
                           $lnk = $links[$c['college_id']-1];
+
+                          if(isset($_POST['del'])){
+                            $col->DelCollege($c_id);
+                          }
                         ?>
                         
                         <tr>
@@ -179,10 +189,14 @@ $links = array("FCAIHelwan.docx","FECairo.docx");
                             
                             <button type="button" class="btn btn-primary btn-fw" ><a href=<?php echo $lnk ?>>Show</a></button>
                          
-                              
+                            <td>
+                           <form action="" method="POST"> <button type="submit" name = "del" class="btn btn-danger btn-fw">
+                            Delete</button></form>
+                            </td>
                               
                             </div>
                             </td>
+
                           </tr>
                        
                         <?php 

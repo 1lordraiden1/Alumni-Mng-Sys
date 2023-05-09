@@ -1,3 +1,34 @@
+<?php 
+require_once '../Models/user.php';
+require_once '../Models/role.php';
+require_once '../Models/college.php';
+//session_start();
+        $usr = new user;
+        $rol = new role;
+        $col = new college;
+        $rols = $rol->GetRoles();
+        $colleges = $col->GetColleges();
+
+
+if (isset($_POST['submit'])) {
+  if (!empty($_POST['user_name']) && !empty($_POST['college_id']) && !empty($_POST['email']) && !empty($_POST['password']) && isset($_POST['role_id'])) {
+
+
+      $result = $usr->register($_POST['user_name'],$_POST['email'], $_POST['password'],$_POST['role_id'],$_POST['college_id']);
+      if ($result == 'User already exists. Try again') {
+          echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
+          echo "<script>setTimeout(\"location.href = 'acc.php';\",2000);</script>";
+      } elseif ($result == 'Error') {
+          echo "<div class='alert alert-danger text-center' role='alert'>$result</div>";
+          echo "<script>setTimeout(\"location.href = 'acc.php';\",2000);</script>";
+      } else {
+          echo "<div class='alert alert-success text-center' role='alert'>$result</div>";
+          echo "<script>setTimeout(\"location.href = 'acc.php';\",2000);</script>";
+      }
+      die;
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +68,10 @@
       <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                    <div class="row">
                     <h4 class="card-title">Add User</h4>
+                    
+                    </div>
                     
                     <form class="forms-sample" method="POST">
                       <div class="form-group">
@@ -52,16 +86,37 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name = "password" placeholder="Password">
                       </div>
-                      <div class="form-group">
-                        <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                        <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
-                      </div>
-                      <div class="form-check form-check-flat form-check-primary">
-                        <label class="form-check-label">
-                          <input type="checkbox" class="form-check-input"> Remember me </label>
-                      </div>
-                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                      <button class="btn btn-dark">Cancel</button>
+                      <div class="mb-3">
+                  <label for="email" class="form-label">Role</label>
+                  <select class="form-control"name="role_id" id="cars">
+                  <?php 
+                          foreach($rols as $r){
+                          ?>
+                          <option value="<?php echo $r['role_id'] ?>"><?php echo $r['role_name']; ?></option>
+                      
+                          <?php
+                          }
+                          ?>     
+                  
+                  
+                  </select>
+                        </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">College</label>
+                  <select class="form-control"name="college_id" id="cars">
+                  <?php 
+                          foreach($colleges as $c){
+                          ?>
+                          <option value="<?php echo $c['college_id'] ?>"><?php echo $c['college_name'] ?></option>
+                      
+                          <?php
+                          }
+                          ?>     
+                  </select>
+                </div>
+                    
+                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button class="btn btn-dark" ><a  href = "acc.php">Cancle</a></button>
                     </form>
                   </div>
                 </div>

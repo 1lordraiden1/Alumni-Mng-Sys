@@ -17,6 +17,7 @@
                 return true;
             }
         }
+        
 
         public function select($sql) {
             $result = mysqli_query($this->conn, $sql);

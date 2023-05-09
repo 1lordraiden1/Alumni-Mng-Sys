@@ -8,6 +8,7 @@ $usr = new user;
 $col = new college;
 $rol = new role;
 $users = $usr->GetAccounts();
+
 ?>
 
 <!DOCTYPE html>
@@ -148,11 +149,19 @@ $users = $usr->GetAccounts();
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
+                    
                     <h4 class="card-title">Accounts</h4>
+                   
+                    
                     <div class="table-responsive">
+                    
                       <table class="table">
+                      <button type="button" class="btn btn-primary btn-fw">
+                            <a class="dropdown-item" href="add_acc.php">ADD</a>
+                    </button>
                         <thead>
                           <tr>
+                          
                             
                           
                             <th> Client Name </th>
@@ -160,15 +169,23 @@ $users = $usr->GetAccounts();
                             <th> Product Cost </th>
                             <th> Project </th>
                             <th> Payment Mode </th>
-                            <th> Start Date </th>
+                          
+                            <th> Delete </th>
                             
                           </tr>
                         </thead>
                         <tbody>
                         <?php 
                         foreach($users as $user){
+                          $u_id = $user['user_id'];
                           $col_id=$col->GetCollegeInfo($user['college_id']);
                           $rol_id=$rol->GetRoleInfo($user['role_id']);
+                        
+                          if(isset($_POST['del'])){
+                            $usr->DelUser($u_id);
+                          }
+                          
+                        
                         ?>
                         <tr>
                             <td>
@@ -180,17 +197,10 @@ $users = $usr->GetAccounts();
                             <td>
                               <div class="badge badge-outline-success"><?php echo  $rol_id[0]['role_name']  ?></div>
                             </td>
+                            
                             <td>
-                            <div class="dropdown">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" id="dropdownMenuIconButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="mdi mdi-clock"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3">
-                          
-                              <a class="dropdown-item" href="add_acc.php">Edit</a>
-                              <a class="dropdown-item" href="#" >Delete</a>
-
-                            </div>
+                           <form action="" method="POST"> <button type="submit" name = "del" class="btn btn-danger btn-fw">
+                            Delete</button></form>
                             </td>
                           </tr>
                         <?php 

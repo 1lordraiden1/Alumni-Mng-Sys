@@ -54,7 +54,7 @@ class user{
         }
     }
     
-	public function register($un, $ci, $em, $pw, $ri){
+	public function register($un, $em, $pw, $ri, $ci){
         $this->user_name = $un;
         $this->college_id = $ci;
         $this->password = $pw;
@@ -64,7 +64,29 @@ class user{
             if ($this->userExists()) {
                 return "User already exists. Try again";
             } else {
-                $qry = "INSERT INTO user (user_name,email,password,role_id,college_id) VALUES ('$this->user_name','$this->email','$this->password','$this->role_id','$this->college_id')";
+                $qry = "INSERT INTO `user`(`user_name`, `email`, `password`, `college_id`, `role_id`) VALUES ('$this->user_name','$this->email','$this->password','$this->role_id','$this->college_id')";
+                if ($this->db->insert($qry)) {
+                    $this->db->closeConnection();
+                    return "Registration successful. Redirecting to login";
+                } else {
+                    $this->db->closeConnection();
+                    return "Error";
+                }
+            }
+        }
+    }
+
+    public function editUser($un, $em, $pw, $ri, $ci){
+        $this->user_name = $un;
+        $this->college_id = $ci;
+        $this->password = $pw;
+        $this->email = $em;
+        $this->role_id = $ri;
+        if ($this->db->startConnection()) {
+            if ($this->userExists()) {
+                return "User already exists. Try again";
+            } else {
+                $qry = "INSERT INTO `user`(`user_name`, `email`, `password`, `college_id`, `role_id`) VALUES ('$this->user_name','$this->email','$this->password','$this->role_id','$this->college_id')";
                 if ($this->db->insert($qry)) {
                     $this->db->closeConnection();
                     return "Registration successful. Redirecting to login";
@@ -110,12 +132,33 @@ class user{
     public function GetUserName($id)
     {
         $this->db->startConnection();
-        $qry = "SELECT`user_name` FROM `user` WHERE `user_id`=$id";
+        $qry = "SELECT `user_name` FROM `user` WHERE `user_id`=$id";
         $result = $this->db->select($qry);
         
         $this->db->closeConnection();
         return $result;        
     }
+    public function SetUserColID($r_id,$c_id)
+    {
+        $this->db->startConnection();
+        $qry = "INSERT INTO `user`(`role_id`, `college_id`) VALUES ('$r_id','$c_id')";
+        $result = $this->db->select($qry);
+        
+        $this->db->closeConnection();
+        return $result;        
+    }
+    public function DelUser($id)
+    {
+        $this->db->startConnection();
+        $qry = "DELETE FROM user WHERE user_id='$id'";
+        $res=$this->db->select($qry);
+        
+        $this->db->closeConnection();
+        return $res;
+          
+    }
+
+
 
 
 

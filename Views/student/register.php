@@ -12,7 +12,7 @@ require_once '../../Models/college.php';
         $colleges = $col->GetColleges();
         $rols = $rol->GetRoles();
 if (isset($_POST['submit'])) {
-    if (!empty($_POST['user_name']) && !empty($_POST['college_id']) && !empty($_POST['email']) && !empty($_POST['password']) && isset($_FILES['role_id'])) {
+    if (!empty($_POST['user_name']) && !empty($_POST['college_id']) && !empty($_POST['email']) && !empty($_POST['password']) && isset($_POST['role_id'])) {
         /*
         $pp_Name = $_FILES['ProfilePic']['name'];
         $Tmp_ppName = $_FILES['ProfilePic']['tmp_name'];
@@ -172,7 +172,7 @@ if (isset($_POST['submit'])) {
                   <?php 
                           foreach($rols as $r){
                           ?>
-                          <option value="echo $r['role_id']"><?php echo $r['role_name'] ?></option>
+                          <option value="<?php echo $r['role_id'] ?>"><?php echo $r['role_name']; ?></option>
                       
                           <?php
                           }
@@ -187,7 +187,7 @@ if (isset($_POST['submit'])) {
                   <?php 
                           foreach($colleges as $c){
                           ?>
-                          <option value="echo $c['college_id']"><?php echo $c['college_name'] ?></option>
+                          <option value="<?php echo $c['college_id'] ?>"><?php echo $c['college_name'] ?></option>
                       
                           <?php
                           }

@@ -8,9 +8,16 @@
 
 <?php
 require_once '../../Models/user.php';
+require_once '../../Models/admin.php';
+
+//$ADDMINN = admin::createSingleton();
+//$adminName = $ADDMINN->getADMIN();
+//$adminPass = $ADDMINN->getPASS();
+
+
 if (isset($_POST['submit'])) {
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
-        if($_POST['email']=='admin' && $_POST['password']=='123'){
+        if($_POST['email']=="admin" && $_POST['password']=="123"){
           echo "<script>setTimeout(\"location.href = '../../Pages/dash.php';\",2000);</script>";
           exit();
         }
