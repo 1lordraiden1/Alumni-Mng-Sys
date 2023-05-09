@@ -44,6 +44,46 @@ class event{
         $this->db->closeConnection();
         return count($result);        
     }
+    public function accept_event($event ,$email){
+    
+        //   ++$x;
+        if($this->db->startConnection()){
+             $qry="insert into acceptevent values('$event','$email')";
+             $this->db->closeConnection();
+            return  $this->db->insert($qry);
+
+            //  return $x;
+        }else{
+            echo 'not open';
+            $this->db->closeConnection();
+            return false;
+        }
+    }
+    public function number($event){
+        
+        if($this->db->startConnection()){
+             $qry="select * from acceptevent where event='$event'";
+             $this->db->closeConnection();
+             return $this->db->select($qry);
+        }else{
+            echo 'not open';
+            $this->db->closeConnection();
+            return false;
+        }
+      }
+    public function member($event,$name){
+        
+        if( $this->db->startConnection()){
+             $qry="select * from acceptevent where event='$event' and name='$name'";
+             $this->db->closeConnection();
+             return $this->db->select($qry);
+        }else{
+            echo 'not open';
+            $this->db->closeConnection();
+            return false;
+        }
+      }
+    
 }
 
 
