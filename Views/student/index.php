@@ -230,8 +230,8 @@ session_start();
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  , made with ❤️ by
-                  <p class="footer-link fw-bolder">Mona Mohamed</p>
+                 <?php /*, made with ❤️ by
+                  <p class="footer-link fw-bolder">Mona Mohamed</p>*/?>
                 </div>
               </div>
             </footer>

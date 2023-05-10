@@ -216,8 +216,8 @@ session_start();
             </div>
             <!-- / Content -->
 
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
+            <!-- Footer --><?php
+            /*<footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                   ©
@@ -228,7 +228,7 @@ session_start();
                   <p class="footer-link fw-bolder">Mona Mohamed</p>
                 </div>
               </div>
-            </footer>
+            </footer>*/?>
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>

@@ -47,8 +47,8 @@
 </head>
 <body>
     <?php
-        require_once "../controller/authcontrole.php";
-        require_once "../controller/news_controle.php";
+       require_once '../Controllers/DBController.php';
+        require_once "../Controllers/news_controle.php";
         session_start();
         $feed=new News;
     if(isset($_POST["feedback1"])){
@@ -65,7 +65,7 @@
                     <div class="card-body">
                       <form method="post">
                         <div class="mb-3">
-                          <label class="form-label" for="basic-default-email">fesdback</label>
+                          <label class="form-label" for="basic-default-email">feedback</label>
                           <div class="input-group input-group-merge">
                             <textarea
                             name="feedback"

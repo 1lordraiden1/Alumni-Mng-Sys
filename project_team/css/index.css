@@ -1,0 +1,10 @@
+.event {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    column-gap: 71px;
+}

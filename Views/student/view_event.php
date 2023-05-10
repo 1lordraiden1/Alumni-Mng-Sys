@@ -1,13 +1,17 @@
 <?php
   session_start();
- require_once "../controller/event_controle.php";
- $events =new Event;
- $allevent=$events->allevent();
+ require_once "../Controllers/DBController.php";
+ require_once "../../Models/event.php";
+ require_once "../../Models/user.php";
+$use= new user;
+$def_id=20;
+ $eve =new event;
+ $allevent=$eve->GetEvents();
  $x;
  if(isset($_POST['event'])){
-         $x=count($events->member($_POST["event"],$_POST["name"]));
+         $x=count($eve->member($_POST["event"],$_POST["name"]));
          if($x==0) {
-            $events->accept_event($_POST["event"],$_POST["name"]);
+            $eve->accept_event($_POST["event"],$_POST["name"]);
          }
  }
 
@@ -70,60 +74,43 @@
                                     <thead>
                                         <tr>
                                             <th>event</th>
-                                            <th>lecturer</th>
-                                            <th>date</th>
-                                            <th>adress</th>
+                                            <th>Event Name</th>
+                                            <th>Place</th>
+                                            <th>Day</th>
+                                            <th>Time</th>
                                             <th>Status</th>
-                                            <th>Actions</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
-                                    <?php
-                                    foreach($allevent as $event){
-                                        ?>
-                                    <tbody class="table-border-bottom-0">
-                                        <tr>
-                                            <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong><?php echo $event["event"];?></strong></td>
-                                            <?php $num=count($events->number( $event["event"]));?>
-                                            <br>
-                                            <td><?php echo $event["lecturer"];?></td>
-                                            <td><?php echo $event["date"];?></td>
-                                            <td><?php echo $event["address"];?></td>
-                                            <?php
-                                              if($num<=$event["number_student"]){
-                                                ?>
-                                                   <td><span class="badge bg-label-info me-1">active</span></td>
-                                                <?php
-                                              }else{
-                                                ?>
-                                                   <td><span class="badge bg-label-info me-1">COMPLETED</span></td>
-                                                <?php
+                                    <?php 
+                        foreach($allevent as $e){
+      
+                        ?>
+                        <tr>
+                            <td>
+                              <span class="pl-2"><?php echo $e['event_id'] ?></span>
+                            </td>
+                            <td> <?php echo $e['event_name'] ?> </td>
+                            <td>  <?php echo $e['place'] ?> </td>
+                            <td> <?php  echo $e['day'] ?> </td>
+                            <td>
+                              <?php echo  $e['time']  ?>
+                            </td>
+                            <td>
+                            
 
-                                              }
-                                            ?>
-                                            <td>
-                                            <form method="POST" >
-                                                <input type="hidden" name="event" value='<?php echo  $event["event"]; ?>'>
-                                                <input type="hidden" name="name" value='<?php echo $_SESSION["email"] ?>'>
-                                                <?php
-                                                   $x=count($events->member($event["event"], $_SESSION["email"]));
-                                                  if($x>=1){  
-                                                ?>
-                                                  <button type="submit" class="btn btn-primary"name="accept"disabled >accept</button>
-                                                <?php
-                                                  }else{
-                                                ?>
-                                                  <button type="submit" class="btn btn-primary"name="accept" >accept</button>
-                                                <?php
-
-                                                  }
-                                                  ?>
-                                             </form>
-                                            </td>
+                            </div>
+                            </td>
+                          </tr>
+                        <?php 
+                        }?>
+                            
+                                            
                                         </tr>
 
                                     </tbody>
                                         <?php
-                                    }
+                                    
                                     ?>
                                 </table>
                             </div>
